@@ -6,8 +6,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.levibostian.wemote.R;
+import com.twitter.sdk.android.tweetui.SearchTimeline;
+import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
 public class HashtagFeedFragment extends Fragment {
 
@@ -16,6 +19,8 @@ public class HashtagFeedFragment extends Fragment {
 
     private String mNameShow;
     private String mHashtag;
+
+    private ListView mHashtagListView;
 
     public static HashtagFeedFragment newInstance(String nameShow, String hashtag) {
         HashtagFeedFragment fragment = new HashtagFeedFragment();
@@ -43,6 +48,20 @@ public class HashtagFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hashtag_feed, container, false);
 
+        mHashtagListView = (ListView) view.findViewById(R.id.hashtag_listview);
+
+        setupViews();
+
         return view;
     }
+
+    private void setupViews() {
+        final SearchTimeline searchTimeline = new SearchTimeline.Builder()
+                .query(mHashtag)
+                .build();
+
+        final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(getActivity(), searchTimeline);
+        mHashtagListView.setAdapter(adapter);
+    }
+    
 }

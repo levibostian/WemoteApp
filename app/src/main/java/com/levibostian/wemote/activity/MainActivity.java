@@ -1,10 +1,14 @@
 package com.levibostian.wemote.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import com.levibostian.wemote.R;
 import com.levibostian.wemote.fragment.HashtagFeedFragment;
 import com.levibostian.wemote.fragment.LoginFragment;
@@ -33,6 +37,35 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         setContentView(R.layout.activity_main);
 
         determineIfUserLoggedIn();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        checkTwitterAppInstalled();
+    }
+
+    private void checkTwitterAppInstalled() {
+        PackageManager pkManager = getPackageManager();
+        try {
+            PackageInfo pkgInfo = pkManager.getPackageInfo("com.twitter.android", 0);
+            String getPkgInfo = pkgInfo.toString();
+
+            if (getPkgInfo.equals("com.twitter.android"))   {
+                // App installed. All good.
+                return;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+
+            Toast.makeText(this, "Must install Twitter app to use " + getString(R.string.app_name), Toast.LENGTH_LONG).show();
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.twitter.android")));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.twitter.android")));
+            }
+        }
     }
 
     private void determineIfUserLoggedIn() {

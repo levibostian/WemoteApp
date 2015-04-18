@@ -1,4 +1,4 @@
-package com.levibostian.wemote;
+package com.levibostian.wemote.fragment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -6,17 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Intent;
+import com.levibostian.wemote.R;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
-public class MainActivityFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
     private TwitterLoginButton loginButton;
 
-    public MainActivityFragment() {
+    public LoginFragment() {
     }
 
     @Override

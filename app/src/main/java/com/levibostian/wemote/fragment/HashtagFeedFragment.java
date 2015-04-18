@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.levibostian.wemote.R;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
@@ -21,6 +24,7 @@ public class HashtagFeedFragment extends Fragment {
     private String mHashtag;
 
     private ListView mHashtagListView;
+    private Button mSendTweetButton;
 
     public static HashtagFeedFragment newInstance(String nameShow, String hashtag) {
         HashtagFeedFragment fragment = new HashtagFeedFragment();
@@ -49,6 +53,7 @@ public class HashtagFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_hashtag_feed, container, false);
 
         mHashtagListView = (ListView) view.findViewById(R.id.hashtag_listview);
+        mSendTweetButton = (Button) view.findViewById(R.id.send_tweet_button);
 
         setupViews();
 
@@ -62,6 +67,19 @@ public class HashtagFeedFragment extends Fragment {
 
         final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(getActivity(), searchTimeline);
         mHashtagListView.setAdapter(adapter);
+
+        mSendTweetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                composeNewTweet();
+            }
+        });
     }
-    
+
+    private void composeNewTweet() {
+        TweetComposer.Builder builder = new TweetComposer.Builder(getActivity())
+                .text("#" + mHashtag + " ");
+        builder.show();
+    }
+
 }

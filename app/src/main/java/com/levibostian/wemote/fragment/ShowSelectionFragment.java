@@ -10,13 +10,36 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import com.levibostian.wemote.R;
 import com.levibostian.wemote.adapter.ShowSelectionImageAdapter;
+import com.levibostian.wemote.vo.ShowVo;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class ShowSelectionFragment extends Fragment {
 
     private GridView mShowSelectionGridView;
 
+    private ArrayList<ShowVo> mShows;
+
+    private ShowSelectionFragmentListener mListener;
+
+    public interface ShowSelectionFragmentListener {
+        void showSelected(String nameShow, String hashtag);
+    }
+
+    public void setListener(ShowSelectionFragmentListener listener) {
+        mListener = listener;
+    }
+
     public static ShowSelectionFragment newInstance() {
         return new ShowSelectionFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mShows = getShows();
     }
 
     @Nullable
@@ -32,13 +55,26 @@ public class ShowSelectionFragment extends Fragment {
     }
 
     private void setupViews() {
-        mShowSelectionGridView.setAdapter(new ShowSelectionImageAdapter(getActivity()));
+        mShowSelectionGridView.setAdapter(new ShowSelectionImageAdapter(getActivity(), mShows));
 
         mShowSelectionGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // get the position and pull out the data for that position.
+                mListener.showSelected(mShows.get(position).name, mShows.get(position).hashtag);
             }
         });
+    }
+
+    public ArrayList<ShowVo> getShows() {
+        ArrayList<ShowVo> shows = new ArrayList<>();
+
+        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
+        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
+        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
+        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
+        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
+        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
+
+        return shows;
     }
 }

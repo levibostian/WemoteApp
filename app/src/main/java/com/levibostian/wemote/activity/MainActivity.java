@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.levibostian.wemote.R;
+import com.levibostian.wemote.fragment.HashtagFeedFragment;
 import com.levibostian.wemote.fragment.LoginFragment;
 import com.levibostian.wemote.fragment.ShowSelectionFragment;
 import com.twitter.sdk.android.Twitter;
@@ -13,7 +14,8 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
 
 
-public class MainActivity extends ActionBarActivity implements LoginFragment.LoginFragmentListener {
+public class MainActivity extends ActionBarActivity implements LoginFragment.LoginFragmentListener,
+                                                               ShowSelectionFragment.ShowSelectionFragmentListener {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "0W8H1dPaxTBHmMSaWCMhJraXo";
@@ -59,8 +61,11 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
 
     @Override
     public void loginComplete() {
+        ShowSelectionFragment fragment = ShowSelectionFragment.newInstance();
+        fragment.setListener(this);
+
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, ShowSelectionFragment.newInstance())
+                .replace(R.id.fragment_container, fragment)
                 .commit();
     }
 
@@ -69,5 +74,12 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         super.onActivityResult(requestCode, resultCode, data);
 
         mLoginFragment.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void showSelected(String nameShow, String hashtag) {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, HashtagFeedFragment.newInstance(nameShow, hashtag))
+                .commit();
     }
 }

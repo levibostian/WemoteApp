@@ -20,11 +20,11 @@ public class ShowSelectionImageAdapter extends BaseAdapter {
     private ArrayList<ShowVo> mShows;
     private LayoutInflater mInflater;
 
-    public ShowSelectionImageAdapter(Context context) {
+    public ShowSelectionImageAdapter(Context context, ArrayList<ShowVo> shows) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
 
-        mShows = getShows();
+        mShows = shows;
     }
 
     @Override
@@ -63,18 +63,5 @@ public class ShowSelectionImageAdapter extends BaseAdapter {
         showName.setText(show.name);
 
         return view;
-    }
-
-    public ArrayList<ShowVo> getShows() {
-        ArrayList<ShowVo> shows = new ArrayList<>();
-
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-
-        return shows;
     }
 }

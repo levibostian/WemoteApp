@@ -11,6 +11,8 @@ import com.levibostian.wemote.fragment.LoginFragment;
 import com.levibostian.wemote.fragment.ShowSelectionFragment;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.twitter.sdk.android.core.TwitterSession;
 import io.fabric.sdk.android.Fabric;
 
 
@@ -30,7 +32,19 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
 
-        setupLoginFragment();
+        determineIfUserLoggedIn();
+    }
+
+    private void determineIfUserLoggedIn() {
+        if (isUserLoggedIn()) {
+            loginComplete();
+        } else {
+            setupLoginFragment();
+        }
+    }
+
+    private boolean isUserLoggedIn() {
+        return Twitter.getSessionManager().getActiveSession() != null;
     }
 
     private void setupLoginFragment() {
@@ -38,7 +52,7 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         mLoginFragment.setListener(this);
 
         getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, mLoginFragment)
+                .replace(R.id.fragment_container, mLoginFragment)
                 .commit();
     }
 
@@ -52,11 +66,16 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            logoutUser();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void logoutUser() {
+        setupLoginFragment();
     }
 
     @Override

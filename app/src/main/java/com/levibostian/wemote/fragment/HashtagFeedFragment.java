@@ -69,6 +69,7 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
     private void populateHashtagList() {
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
                                                       .query(mHashtag)
+                                                      .languageCode("en")
                                                       .build();
         final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(getActivity(), searchTimeline);
         mHashtagListView.setAdapter(adapter);

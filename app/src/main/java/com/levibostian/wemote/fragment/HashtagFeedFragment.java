@@ -43,8 +43,6 @@ public class HashtagFeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hashtag_feed, container, false);
 
-        ((TextView) view.findViewById(R.id.name_show)).setText(mNameShow);
-
         return view;
     }
 }

@@ -2,7 +2,9 @@ package com.levibostian.wemote.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 
-public class HashtagFeedFragment extends Fragment {
+public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String NAME_SHOW_TAG = "hashtagFeedFragment.showTag";
     private static final String HASHTAG_TAG = "hashtagFeedFragment.hashtagTag";
@@ -25,6 +27,7 @@ public class HashtagFeedFragment extends Fragment {
 
     private ListView mHashtagListView;
     private Button mSendTweetButton;
+    private SwipeRefreshLayout mSwipeToRefreshLayout;
 
     public static HashtagFeedFragment newInstance(String nameShow, String hashtag) {
         HashtagFeedFragment fragment = new HashtagFeedFragment();
@@ -54,19 +57,23 @@ public class HashtagFeedFragment extends Fragment {
 
         mHashtagListView = (ListView) view.findViewById(R.id.hashtag_listview);
         mSendTweetButton = (Button) view.findViewById(R.id.send_tweet_button);
+        mSwipeToRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_to_refresh);
 
         setupViews();
 
         return view;
     }
 
-    private void setupViews() {
+    private void populateHashtagList() {
         final SearchTimeline searchTimeline = new SearchTimeline.Builder()
-                .query(mHashtag)
-                .build();
-
+                                                      .query(mHashtag)
+                                                      .build();
         final TweetTimelineListAdapter adapter = new TweetTimelineListAdapter(getActivity(), searchTimeline);
         mHashtagListView.setAdapter(adapter);
+    }
+
+    private void setupViews() {
+        populateHashtagList();
 
         mSendTweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +81,30 @@ public class HashtagFeedFragment extends Fragment {
                 composeNewTweet();
             }
         });
+
+        mSwipeToRefreshLayout.setOnRefreshListener(this);
     }
 
     private void composeNewTweet() {
         TweetComposer.Builder builder = new TweetComposer.Builder(getActivity())
                 .text("#" + mHashtag + " ");
         builder.show();
+    }
+
+    private void setRefresh(boolean indicateRefresh) {
+        mSwipeToRefreshLayout.setRefreshing(indicateRefresh);
+    }
+    
+    @Override
+    public void onRefresh() {
+        populateHashtagList();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setRefresh(false);
+            }
+        }, 2000);
     }
 
 }

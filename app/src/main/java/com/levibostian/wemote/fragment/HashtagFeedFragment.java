@@ -28,6 +28,7 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
     private ListView mHashtagListView;
     private Button mSendTweetButton;
     private SwipeRefreshLayout mSwipeToRefreshLayout;
+    private TextView mEmptyText;
 
     public static HashtagFeedFragment newInstance(String nameShow, String hashtag) {
         HashtagFeedFragment fragment = new HashtagFeedFragment();
@@ -58,6 +59,7 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
         mHashtagListView = (ListView) view.findViewById(R.id.hashtag_listview);
         mSendTweetButton = (Button) view.findViewById(R.id.send_tweet_button);
         mSwipeToRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_to_refresh);
+        mEmptyText = (TextView) view.findViewById(android.R.id.empty);
 
         setupViews();
 
@@ -74,6 +76,8 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
 
     private void setupViews() {
         populateHashtagList();
+
+        mHashtagListView.setEmptyView(mEmptyText);
 
         mSendTweetButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +108,7 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
             public void run() {
                 setRefresh(false);
             }
-        }, 2000);
+        }, 1500);
     }
 
 }

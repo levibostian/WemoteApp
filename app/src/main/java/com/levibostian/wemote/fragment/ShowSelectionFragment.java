@@ -68,12 +68,17 @@ public class ShowSelectionFragment extends Fragment {
     public ArrayList<ShowVo> getShows() {
         ArrayList<ShowVo> shows = new ArrayList<>();
 
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
-        shows.add(new ShowVo("The Office", R.drawable.the_office, "TheOffice"));
+        shows.add(new ShowVo("The Walking Dead", R.drawable.walking_dead, "TheWalkingDead"));
+        shows.add(new ShowVo("NBA Playoffs", R.drawable.nba_playoffs, "NBAPlayoffs"));
+        shows.add(new ShowVo("Real Housewives of Atlanta", R.drawable.real_housewives_of_atlanta, "RHOA"));
+        shows.add(new ShowVo("Cutthroat Kitchen", R.drawable.cutthroat_kitchen, "CutThroatKitchen"));
+        shows.add(new ShowVo("NHL Playoffs", R.drawable.nhl_playoffs, "NHLPlayoffs"));
+        shows.add(new ShowVo("House of Cards", R.drawable.house_of_cards, "HouseOfCards"));
+        shows.add(new ShowVo("Game of Thrones", R.drawable.game_of_thrones, "GoT"));
+        shows.add(new ShowVo("Orange is the New Black", R.drawable.orange_is_the_new_black, "OITNB"));
+        shows.add(new ShowVo("Better Call Saul", R.drawable.better_call_saul, "BetterCallSaul"));
+        shows.add(new ShowVo("Sons of Anarchy", R.drawable.sons_of_anarchy, "SOA"));
+        shows.add(new ShowVo("Scandal", R.drawable.scandal, "Scandal"));
 
         return shows;
     }

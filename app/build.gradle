@@ -25,10 +25,15 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            zipAlign true
         }
     }
 }
@@ -44,3 +49,13 @@ dependencies {
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
 }
+
+// Here for production release without exposing keys and passwords
+// from: http://www.thoughtworks.com/insights/blog/signing-open-source-android-apps-without-disclosing-passwords
+def props = new Properties()
+props.load(new FileInputStream(rootProject.file("release.properties")))
+android.signingConfigs.release.storeFile rootProject.file(props.keyStore)
+android.signingConfigs.release.storePassword props.keyStorePassword
+android.signingConfigs.release.keyAlias props.keyAlias
+android.signingConfigs.release.keyPassword props.keyAliasPassword
+

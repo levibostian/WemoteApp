@@ -22,6 +22,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,9 +32,6 @@ import java.util.Date;
 public class MainActivity extends ActionBarActivity implements LoginFragment.LoginFragmentListener,
                                                                ShowSelectionFragment.ShowSelectionFragmentListener {
 
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-    private static final String TWITTER_KEY = "0W8H1dPaxTBHmMSaWCMhJraXo";
-    private static final String TWITTER_SECRET = "Q8QekXOw0V1U0d5oWb5EUwhklmgnsS1df2vC6PtVjz4HiPBaj5";
 
     private static final String LOGIN_SCREEN = "LoginScreen";
     private static final String SHOW_SELECTION_SCREEN = "ShowSelectionScreen";
@@ -44,7 +44,18 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        TwitterAuthConfig authConfig = null;
+        String twitterKey = "";
+        String twitterSecret = "";
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("twitter-creds.txt")));
+            twitterKey = reader.readLine();
+            twitterSecret = reader.readLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        authConfig = new TwitterAuthConfig(twitterKey, twitterSecret);
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
 

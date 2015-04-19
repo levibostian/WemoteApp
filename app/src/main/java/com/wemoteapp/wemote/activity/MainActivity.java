@@ -144,7 +144,7 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
             e.printStackTrace();
         }
 
-        mMixpanelAPI.track("Twitter Stats", object);
+        mMixpanelAPI.track("Phone Stats", object);
     }
 
     private void determineIfUserLoggedIn() {
@@ -170,8 +170,16 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         trackUserScreenActivity(LOGIN_SCREEN);
     }
 
-    private void trackUserScreenActivity(String screenToIncrement) {
-        mMixpanelAPI.getPeople().increment(screenToIncrement, 1);
+    private void trackUserScreenActivity(String screenShown) {
+        JSONObject object = new JSONObject();
+
+        try {
+            object.put("App screen", screenShown);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mMixpanelAPI.track("App Stats", object);
     }
 
     @Override

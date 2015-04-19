@@ -11,10 +11,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.wemoteapp.wemote.R;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 import com.twitter.sdk.android.tweetui.SearchTimeline;
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
+import com.wemoteapp.wemote.application.WemoteApplication;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import javax.inject.Inject;
 
 public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -23,6 +29,8 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
 
     private String mNameShow;
     private String mHashtag;
+
+    @Inject MixpanelAPI mMixpanelAPI;
 
     private ListView mHashtagListView;
     private Button mSendTweetButton;
@@ -44,6 +52,8 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        WemoteApplication.inject(this);
 
         Bundle bundle = getArguments();
         mNameShow = bundle.getString(NAME_SHOW_TAG);
@@ -90,9 +100,23 @@ public class HashtagFeedFragment extends Fragment implements SwipeRefreshLayout.
     }
 
     private void composeNewTweet() {
+        trackComposeNewTweet(mHashtag);
+
         TweetComposer.Builder builder = new TweetComposer.Builder(getActivity())
                 .text("#" + mHashtag + " ");
         builder.show();
+    }
+
+    private void trackComposeNewTweet(String nameShow) {
+        JSONObject object = new JSONObject();
+
+        try {
+            object.put("Name of show", nameShow);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mMixpanelAPI.track("Create new tweet", object);
     }
 
     private void setRefresh(boolean indicateRefresh) {

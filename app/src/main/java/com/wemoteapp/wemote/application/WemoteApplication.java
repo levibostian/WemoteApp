@@ -4,6 +4,7 @@ import android.app.Application;
 import com.wemoteapp.wemote.module.ActivityModule;
 import com.wemoteapp.wemote.module.AnalyticsModule;
 import com.wemoteapp.wemote.module.ApplicationModule;
+import com.wemoteapp.wemote.module.FragmentModule;
 import dagger.ObjectGraph;
 
 import java.util.Arrays;
@@ -23,7 +24,8 @@ public class WemoteApplication extends Application {
     protected List<Object> getModules() {
         return Arrays.asList(new ActivityModule(),
                              new AnalyticsModule(),
-                             new ApplicationModule(getApplicationContext()));
+                             new ApplicationModule(getApplicationContext()),
+                             new FragmentModule());
     }
 
     public static void inject(Object object) {

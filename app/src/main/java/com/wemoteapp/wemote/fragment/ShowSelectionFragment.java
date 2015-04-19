@@ -65,7 +65,7 @@ public class ShowSelectionFragment extends Fragment {
     }
 
     public ArrayList<ShowVo> getShows() {
-        ArrayList<ShowVo> shows = new ArrayList<>();
+        ArrayList<ShowVo> shows = new ArrayList<ShowVo>();
 
         shows.add(new ShowVo("The Walking Dead", R.drawable.walking_dead, "TheWalkingDead"));
         shows.add(new ShowVo("NBA Playoffs", R.drawable.nba_playoffs, "NBAPlayoffs"));

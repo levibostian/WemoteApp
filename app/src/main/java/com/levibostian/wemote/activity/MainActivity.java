@@ -214,8 +214,31 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
     public void showSelected(String nameShow, String hashtag) {
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, HashtagFeedFragment.newInstance(nameShow, hashtag))
+                .addToBackStack(null)
                 .commit();
 
         trackUserScreenActivity(HASHTAG_FEED_SCREEN);
+        trackNameOfShowSelected(nameShow);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0 ){
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void trackNameOfShowSelected(String nameShow) {
+        JSONObject object = new JSONObject();
+
+        try {
+            object.put("Name of show", nameShow);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mMixpanelAPI.track("Show Stats", object);
     }
 }

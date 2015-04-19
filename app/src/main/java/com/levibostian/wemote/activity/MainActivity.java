@@ -10,14 +10,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.levibostian.wemote.R;
+import com.levibostian.wemote.application.WemoteApplication;
 import com.levibostian.wemote.fragment.HashtagFeedFragment;
 import com.levibostian.wemote.fragment.LoginFragment;
 import com.levibostian.wemote.fragment.ShowSelectionFragment;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.TwitterSession;
 import io.fabric.sdk.android.Fabric;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import javax.inject.Inject;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity implements LoginFragment.LoginFragmentListener,
@@ -27,7 +33,13 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
     private static final String TWITTER_KEY = "0W8H1dPaxTBHmMSaWCMhJraXo";
     private static final String TWITTER_SECRET = "Q8QekXOw0V1U0d5oWb5EUwhklmgnsS1df2vC6PtVjz4HiPBaj5";
 
+    private static final String LOGIN_SCREEN = "LoginScreen";
+    private static final String SHOW_SELECTION_SCREEN = "ShowSelectionScreen";
+    private static final String HASHTAG_FEED_SCREEN = "HashtagFeedScreen";
+
     private LoginFragment mLoginFragment;
+
+    @Inject MixpanelAPI mMixpanelAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +48,15 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
 
+        WemoteApplication.inject(this);
+
         determineIfUserLoggedIn();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mMixpanelAPI.flush();
+        super.onDestroy();
     }
 
     @Override
@@ -44,6 +64,40 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         super.onResume();
 
         checkTwitterAppInstalled();
+
+        trackTimeStamps();
+    }
+
+    private int hourOfTheDay() {
+        final Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    private long hoursSinceEpoch() {
+        final Date now = new Date();
+        final long nowMillis = now.getTime();
+        return nowMillis / 1000 * 60 * 60;
+    }
+
+    private void trackTimeStamps() {
+        final long nowInHours = hoursSinceEpoch();
+        final int hourOfTheDay = hourOfTheDay();
+
+        try {
+            final JSONObject properties = new JSONObject();
+            properties.put("first viewed on", nowInHours);
+            mMixpanelAPI.registerSuperPropertiesOnce(properties);
+        } catch (final JSONException e) {
+            throw new RuntimeException("Could not encode hour first viewed as JSON");
+        }
+
+        try {
+            final JSONObject properties = new JSONObject();
+            properties.put("hour of the day", hourOfTheDay);
+            mMixpanelAPI.track("App Resumed", properties);
+        } catch(final JSONException e) {
+            throw new RuntimeException("Could not encode hour of the day in JSON");
+        }
     }
 
     private void checkTwitterAppInstalled() {
@@ -59,6 +113,8 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
 
+            trackTwitterNotInstalled();
+
             Toast.makeText(this, "Must install Twitter app to use " + getString(R.string.app_name), Toast.LENGTH_LONG).show();
             try {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.twitter.android")));
@@ -66,6 +122,18 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.twitter.android")));
             }
         }
+    }
+
+    private void trackTwitterNotInstalled() {
+        JSONObject object = new JSONObject();
+
+        try {
+            object.put("TwitterInstalled", false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mMixpanelAPI.track("Twitter Stats", object);
     }
 
     private void determineIfUserLoggedIn() {
@@ -87,6 +155,12 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, mLoginFragment)
                 .commit();
+
+        trackUserScreenActivity(LOGIN_SCREEN);
+    }
+
+    private void trackUserScreenActivity(String screenToIncrement) {
+        mMixpanelAPI.getPeople().increment(screenToIncrement, 1);
     }
 
     @Override
@@ -119,6 +193,8 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
+
+        trackUserScreenActivity(SHOW_SELECTION_SCREEN);
     }
 
     @Override
@@ -126,6 +202,12 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         super.onActivityResult(requestCode, resultCode, data);
 
         mLoginFragment.onActivityResult(requestCode, resultCode, data);
+        setupTrackingProfileName("" + Twitter.getSessionManager().getActiveSession().getUserId());
+    }
+
+    private void setupTrackingProfileName(String userName) {
+        mMixpanelAPI.identify(userName);
+        mMixpanelAPI.getPeople().identify(userName);
     }
 
     @Override
@@ -133,5 +215,7 @@ public class MainActivity extends ActionBarActivity implements LoginFragment.Log
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, HashtagFeedFragment.newInstance(nameShow, hashtag))
                 .commit();
+
+        trackUserScreenActivity(HASHTAG_FEED_SCREEN);
     }
 }

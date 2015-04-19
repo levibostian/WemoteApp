@@ -2,6 +2,7 @@
 release.properties
 *.keystore
 app/src/main/assets/twitter-creds.txt
+app/src/main/assets/mixpanel-creds.txt
 
 #automatically generated.
 .gradle

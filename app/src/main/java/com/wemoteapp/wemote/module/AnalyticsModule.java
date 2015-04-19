@@ -6,16 +6,25 @@ import dagger.Module;
 import dagger.Provides;
 
 import javax.inject.Singleton;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 @Module(library = true, complete = false)
 public class AnalyticsModule {
 
-    public static final String MIXPANEL_TOKEN = "0a13748368bcdea6a66d72bbc95b91c2";
-
     @Singleton
     @Provides
     public MixpanelAPI provideMixpanelAPI(Context context) {
-        return MixpanelAPI.getInstance(context, MIXPANEL_TOKEN);
+        String mixpanelToken = "";
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(context.getAssets().open("mixpanel-creds.txt")));
+            mixpanelToken = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return MixpanelAPI.getInstance(context, mixpanelToken);
     }
 
 }

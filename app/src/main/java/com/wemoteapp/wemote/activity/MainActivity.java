@@ -1,4 +1,4 @@
-package com.levibostian.wemote.activity;
+package com.wemoteapp.wemote.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -9,11 +9,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.levibostian.wemote.R;
-import com.levibostian.wemote.application.WemoteApplication;
-import com.levibostian.wemote.fragment.HashtagFeedFragment;
-import com.levibostian.wemote.fragment.LoginFragment;
-import com.levibostian.wemote.fragment.ShowSelectionFragment;
+import com.wemoteapp.wemote.R;
+import com.wemoteapp.wemote.application.WemoteApplication;
+import com.wemoteapp.wemote.fragment.HashtagFeedFragment;
+import com.wemoteapp.wemote.fragment.LoginFragment;
+import com.wemoteapp.wemote.fragment.ShowSelectionFragment;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;

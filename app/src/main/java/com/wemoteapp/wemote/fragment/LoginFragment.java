@@ -1,4 +1,4 @@
-package com.levibostian.wemote.fragment;
+package com.wemoteapp.wemote.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,8 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Intent;
-import com.levibostian.wemote.R;
-import com.levibostian.wemote.activity.MainActivity;
+import com.wemoteapp.wemote.R;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;

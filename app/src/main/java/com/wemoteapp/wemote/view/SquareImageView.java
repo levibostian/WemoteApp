@@ -1,4 +1,4 @@
-package com.levibostian.wemote.view;
+package com.wemoteapp.wemote.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

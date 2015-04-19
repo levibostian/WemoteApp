@@ -1,3 +1,8 @@
+# manually added
+release.properties
+*.keystore
+
+#automatically generated.
 .gradle
 /local.properties
 /.idea/workspace.xml

@@ -1,6 +1,5 @@
-package com.levibostian.wemote.module;
+package com.wemoteapp.wemote.module;
 
-import android.app.Application;
 import android.content.Context;
 import dagger.Module;
 import dagger.Provides;

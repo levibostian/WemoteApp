@@ -1,4 +1,4 @@
-package com.levibostian.wemote.vo;
+package com.wemoteapp.wemote.vo;
 
 public class ShowVo {
 

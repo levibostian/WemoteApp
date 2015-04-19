@@ -1,6 +1,6 @@
-package com.levibostian.wemote.module;
+package com.wemoteapp.wemote.module;
 
-import com.levibostian.wemote.activity.MainActivity;
+import com.wemoteapp.wemote.activity.MainActivity;
 import dagger.Module;
 
 @Module(injects = {MainActivity.class},

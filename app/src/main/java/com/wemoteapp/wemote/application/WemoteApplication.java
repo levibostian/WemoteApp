@@ -1,9 +1,9 @@
-package com.levibostian.wemote.application;
+package com.wemoteapp.wemote.application;
 
 import android.app.Application;
-import com.levibostian.wemote.module.ActivityModule;
-import com.levibostian.wemote.module.AnalyticsModule;
-import com.levibostian.wemote.module.ApplicationModule;
+import com.wemoteapp.wemote.module.ActivityModule;
+import com.wemoteapp.wemote.module.AnalyticsModule;
+import com.wemoteapp.wemote.module.ApplicationModule;
 import dagger.ObjectGraph;
 
 import java.util.Arrays;

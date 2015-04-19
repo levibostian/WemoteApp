@@ -1,16 +1,14 @@
-package com.levibostian.wemote.adapter;
+package com.wemoteapp.wemote.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.levibostian.wemote.R;
-import com.levibostian.wemote.fragment.ShowSelectionFragment;
-import com.levibostian.wemote.vo.ShowVo;
+import com.wemoteapp.wemote.R;
+import com.wemoteapp.wemote.vo.ShowVo;
 
 import java.util.ArrayList;
 

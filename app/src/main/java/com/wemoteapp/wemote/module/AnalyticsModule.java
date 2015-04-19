@@ -1,4 +1,4 @@
-package com.levibostian.wemote.module;
+package com.wemoteapp.wemote.module;
 
 import android.content.Context;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;

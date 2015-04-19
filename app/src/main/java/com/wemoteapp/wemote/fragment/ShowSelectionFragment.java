@@ -1,4 +1,4 @@
-package com.levibostian.wemote.fragment;
+package com.wemoteapp.wemote.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import com.levibostian.wemote.R;
-import com.levibostian.wemote.adapter.ShowSelectionImageAdapter;
-import com.levibostian.wemote.vo.ShowVo;
+import com.wemoteapp.wemote.R;
+import com.wemoteapp.wemote.adapter.ShowSelectionImageAdapter;
+import com.wemoteapp.wemote.vo.ShowVo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ShowSelectionFragment extends Fragment {

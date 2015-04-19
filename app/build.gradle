@@ -19,7 +19,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.levibostian.wemote"
+        applicationId "com.wemoteapp.wemote"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

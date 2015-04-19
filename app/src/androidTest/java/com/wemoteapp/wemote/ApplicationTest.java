@@ -1,4 +1,4 @@
-package com.levibostian.wemote;
+package com.wemoteapp.wemote;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

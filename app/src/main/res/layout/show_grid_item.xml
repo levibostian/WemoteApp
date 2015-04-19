@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.levibostian.wemote.view.SquareImageView
+    <com.wemoteapp.wemote.view.SquareImageView
         android:id="@+id/show_imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -2,4 +2,25 @@
 <resources>
     <color name="primary_theme_color">#FF05051E</color>
     <color name="secondary_theme_color">#FF00AAD0</color>
+
+    <color name="american_idol_theme_color">#2D8FFE</color>
+    <color name="better_call_saul_theme_color">#AF8009</color>
+    <color name="cutthroat_kitchen_theme_color">#56070C</color>
+    <color name="game_of_thrones_theme_color">#18191D</color>
+    <color name="greys_anatomy_theme_color">#63A0DA</color>
+    <color name="house_of_cards_theme_color">#2B303A</color>
+    <color name="modern_family_theme_color">#B6413E</color>
+    <color name="nba_playoffs_theme_color">#DF7609</color>
+    <color name="nhl_playoffs_theme_color">#AFAAB2</color>
+    <color name="once_upon_a_time_theme_color">#73A6F5</color>
+    <color name="orange_is_the_new_black_theme_color">#FC6319</color>
+    <color name="real_housewives_of_atlanta_theme_color">#AD5FA1</color>
+    <color name="scandal_theme_color">#AF8468</color>
+    <color name="sons_of_anarchy_theme_color">#0D0E12</color>
+    <color name="the_bachelor_theme_color">#F2237F</color>
+    <color name="the_blacklist_theme_color">#2D2C31</color>
+    <color name="the_view_theme_color">#49A49C</color>
+    <color name="the_voice_theme_color">#D80528</color>
+    <color name="walking_dead_theme_color">#DCBAA0</color>
+    <color name="today_show_theme_color">#3F5352</color>
 </resources>

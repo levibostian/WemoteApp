@@ -3,12 +3,12 @@ package com.wemoteapp.wemote.vo;
 public class ShowVo {
 
     public String name;
-    public int imageRes;
+    public int colorRes;
     public String hashtag;
 
-    public ShowVo(String name, int imageRes, String hashtag) {
+    public ShowVo(String name, int colorRes, String hashtag) {
         this.name = name;
-        this.imageRes = imageRes;
+        this.colorRes = colorRes;
         this.hashtag = hashtag;
     }
 }

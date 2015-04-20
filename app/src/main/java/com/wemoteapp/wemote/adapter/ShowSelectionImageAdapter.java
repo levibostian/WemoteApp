@@ -37,7 +37,7 @@ public class ShowSelectionImageAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return mShows.get(position).imageRes;
+        return mShows.get(position).colorRes;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ShowSelectionImageAdapter extends BaseAdapter {
 
         ShowVo show = mShows.get(position);
 
-        showImage.setImageResource(show.imageRes);
+        showImage.setImageResource(show.colorRes);
         showName.setText(show.name);
 
         return view;

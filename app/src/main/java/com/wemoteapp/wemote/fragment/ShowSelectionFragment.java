@@ -65,26 +65,26 @@ public class ShowSelectionFragment extends Fragment {
     public ArrayList<ShowVo> getShows() {
         ArrayList<ShowVo> shows = new ArrayList<ShowVo>();
 
-        shows.add(new ShowVo("American Idol", R.drawable.american_idol, "Idol"));
-        shows.add(new ShowVo("Better Call Saul", R.drawable.better_call_saul, "BetterCallSaul"));
-        shows.add(new ShowVo("Cutthroat Kitchen", R.drawable.cutthroat_kitchen, "CutThroatKitchen"));
-        shows.add(new ShowVo("Game of Thrones", R.drawable.game_of_thrones, "GoT"));
-        shows.add(new ShowVo("Greys Anatomy", R.drawable.greys_anatomy, "GreysAnatomy"));
-        shows.add(new ShowVo("House of Cards", R.drawable.house_of_cards, "HouseOfCards"));
-        shows.add(new ShowVo("Modern Family", R.drawable.modern_family, "ModernFamily"));
-        shows.add(new ShowVo("NBA Playoffs", R.drawable.nba_playoffs, "NBAPlayoffs"));
-        shows.add(new ShowVo("NHL Playoffs", R.drawable.nhl_playoffs, "NHLPlayoffs"));
-        shows.add(new ShowVo("Once Upon A Time", R.drawable.once_upon_a_time, "OnceUponATime"));
-        shows.add(new ShowVo("Orange is the New Black", R.drawable.orange_is_the_new_black, "OITNB"));
-        shows.add(new ShowVo("Real Housewives of Atlanta", R.drawable.real_housewives_of_atlanta, "RHOA"));
-        shows.add(new ShowVo("Scandal", R.drawable.scandal, "Scandal"));
-        shows.add(new ShowVo("Sons of Anarchy", R.drawable.sons_of_anarchy, "SOA"));
-        shows.add(new ShowVo("The Bachelor", R.drawable.the_bachelor, "TheBachelor"));
-        shows.add(new ShowVo("The Blacklist", R.drawable.the_blacklist, "TheBlacklist"));
-        shows.add(new ShowVo("The View", R.drawable.the_view, "TheView"));
-        shows.add(new ShowVo("The Voice", R.drawable.the_voice, "TheVoice"));
-        shows.add(new ShowVo("The Walking Dead", R.drawable.walking_dead, "TheWalkingDead"));
-        shows.add(new ShowVo("Today Show", R.drawable.today_show, "TodayShow"));
+        shows.add(new ShowVo("American Idol", R.color.american_idol_theme_color, "Idol"));
+        shows.add(new ShowVo("Better Call Saul", R.color.better_call_saul_theme_color, "BetterCallSaul"));
+        shows.add(new ShowVo("Cutthroat Kitchen", R.color.cutthroat_kitchen_theme_color, "CutThroatKitchen"));
+        shows.add(new ShowVo("Game of Thrones", R.color.game_of_thrones_theme_color, "GoT"));
+        shows.add(new ShowVo("Greys Anatomy", R.color.greys_anatomy_theme_color, "GreysAnatomy"));
+        shows.add(new ShowVo("House of Cards", R.color.house_of_cards_theme_color, "HouseOfCards"));
+        shows.add(new ShowVo("Modern Family", R.color.modern_family_theme_color, "ModernFamily"));
+        shows.add(new ShowVo("NBA Playoffs", R.color.nba_playoffs_theme_color, "NBAPlayoffs"));
+        shows.add(new ShowVo("NHL Playoffs", R.color.nhl_playoffs_theme_color, "NHLPlayoffs"));
+        shows.add(new ShowVo("Once Upon A Time", R.color.once_upon_a_time_theme_color, "OnceUponATime"));
+        shows.add(new ShowVo("Orange is the New Black", R.color.orange_is_the_new_black_theme_color, "OITNB"));
+        shows.add(new ShowVo("Real Housewives of Atlanta", R.color.real_housewives_of_atlanta_theme_color, "RHOA"));
+        shows.add(new ShowVo("Scandal", R.color.scandal_theme_color, "Scandal"));
+        shows.add(new ShowVo("Sons of Anarchy", R.color.sons_of_anarchy_theme_color, "SOA"));
+        shows.add(new ShowVo("The Bachelor", R.color.the_bachelor_theme_color, "TheBachelor"));
+        shows.add(new ShowVo("The Blacklist", R.color.the_blacklist_theme_color, "TheBlacklist"));
+        shows.add(new ShowVo("The View", R.color.the_view_theme_color, "TheView"));
+        shows.add(new ShowVo("The Voice", R.color.the_voice_theme_color, "TheVoice"));
+        shows.add(new ShowVo("The Walking Dead", R.color.walking_dead_theme_color, "TheWalkingDead"));
+        shows.add(new ShowVo("Today Show", R.color.today_show_theme_color, "TodayShow"));
 
         return shows;
     }

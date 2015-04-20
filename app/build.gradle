@@ -22,8 +22,8 @@ android {
         applicationId "com.wemoteapp.wemote"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 3
-        versionName "1.1.1"
+        versionCode 4
+        versionName "1.1.2"
     }
     signingConfigs {
         release
